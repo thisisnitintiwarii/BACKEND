@@ -11,7 +11,6 @@
 
 
 
-
 import { ApiError } from "../utils/ApiError.js"
 
 import { asyncHandler } from "../utils/asyncHandler.js"
@@ -74,7 +73,7 @@ const registerUser = asyncHandler(async (req, res) => {
         coverImage: coverImage?.url || "",
         email,
         password,
-        username: username.toLowerCase();
+        username: username.toLowerCase()
     })
 
 
@@ -83,11 +82,13 @@ const registerUser = asyncHandler(async (req, res) => {
         "-password -refreshToken"
     )
 
-    if(!createdUser){
-        throw new ApiError(500,"something went wrong while registring the user")
+    if (!createdUser) {
+        throw new ApiError(500, "something went wrong while registring the user")
     }
 
-
+    return res.status(201).json(
+        new ApiResponse(200, createdUser, "User registered successfully")
+    )
 
 })
 
