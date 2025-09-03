@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerUser, logOutUser, loginUser } from "../controllers/user.controller.js";
+import { registerUser, logOutUser, loginUser,refreshAccessToken } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js"
 
@@ -22,6 +22,6 @@ console.log("User router loaded");
 
 //secured routes
 router.route("/logout").post(verifyJWT, logOutUser) // two methods here thats why wrote next() in middleware
-
+router.route("/refresh-token").post(refreshAccessToken)
 
 export default router;
